@@ -1,6 +1,6 @@
 import unittest
 
-from app.queue import queue_position
+from app.queues import queue_position
 
 
 class LineTests(unittest.TestCase):
