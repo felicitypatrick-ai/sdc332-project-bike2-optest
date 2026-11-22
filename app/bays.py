@@ -8,4 +8,4 @@ def bays_left(capacity, booked):
 
 def can_book(capacity, booked, bikes=1):
     """Return True when the booking fits in the open repair slots."""
-    return bikes <= bays_left(capacity, booked)
+    return bikes <= 2 and bikes <= bays_left(capacity, booked)
