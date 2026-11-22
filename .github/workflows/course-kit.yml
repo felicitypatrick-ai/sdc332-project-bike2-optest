@@ -1,0 +1,213 @@
+name: Course kit
+
+# SDC332 course kit. Paste this file once, then run it from the Actions tab.
+# Each step writes files or branches in this repository only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      step:
+        description: "Which kit step to run"
+        required: true
+        type: choice
+        options:
+          - start
+          - team-update
+          - releases
+          - speed-up
+      app:
+        description: "Starter app (start step only)"
+        required: false
+        type: choice
+        default: pantry
+        options:
+          - pantry
+          - bike
+          - room
+          - own
+      card:
+        description: "Card number from your instructor (leave blank if you were not given one)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  kit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run the kit step
+        shell: bash
+        env:
+          STEP: ${{ inputs.step }}
+          APP: ${{ inputs.app }}
+          WHO: ${{ github.actor }}
+          CARD: ${{ inputs.card }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cat > /tmp/kit.b64 <<'KIT'
+          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
+          KIT
+          python3 - <<'PY'
+          import base64, gzip, hashlib, json, os, subprocess, sys
+          data = json.loads(gzip.decompress(base64.b64decode(open("/tmp/kit.b64").read().replace(" ", "").replace("\n", ""))))
+          step, who = os.environ["STEP"], os.environ["WHO"]
+          D = data["D"]; exec(data["g"])
+          out = open(os.environ["GITHUB_STEP_SUMMARY"], "a")
+          def say(t): print(t); out.write(t + "\n\n")
+          def git(*a): subprocess.run(["git", *a], check=True)
+          def write(p, t):
+              os.makedirs(os.path.dirname(p) or ".", exist_ok=True); open(p, "w").write(t)
+          def change(items):
+              for p, old, new in items:
+                  if old is None:
+                      write(p, new); continue
+                  t = open(p).read() if os.path.exists(p) else ""
+                  if old not in t:
+                      say(f"Stop: the kit could not update {p}, because that file is not as the starter left it. Ask your instructor.")
+                      sys.exit(1)
+                  write(p, t.replace(old, new, 1))
+          if step == "start":
+              if os.path.exists("course/card.json"):
+                  say("Your starter app is already here. Nothing changed."); sys.exit(0)
+              c = (os.environ.get("CARD") or "").strip()
+              if c and not (c.isdigit() and 1 <= int(c) <= D["N"]):
+                  say(f"Stop: the card number must be a whole number from 1 to {D['N']}. Nothing changed."); sys.exit(1)
+              n = int(c) if c else int(hashlib.sha256(who.lower().encode()).hexdigest(), 16) % D["N"] + 1
+              app = os.environ.get("APP") or "pantry"
+              facts, s, e, rel, v = card(D, app, n)
+              for p, t in D[app].get("f", {}).items(): write(p, t)
+              write("course/card.json", json.dumps(facts, indent=2, sort_keys=True) + "\n"); change(s)
+              git("add", "-A"); git("commit", "-q", "-m", "Add the team card" if app == "own" else "Add the starter app and team card"); git("push", "-q", "origin", "HEAD:main")
+              say(f"Done: your team card (card {n}) is on main" + ("" if app == "own" else ", with the starter app") + ". Open course/card.json to read your team's facts.")
+              sys.exit(0)
+          cj = json.load(open("course/card.json")) if os.path.exists("course/card.json") else None
+          if not cj:
+              say("Stop: run the start step first."); sys.exit(1)
+          name = next((a for a in ("pantry", "bike", "room") if D[a]["m"]["title"] == cj.get("app")), None)
+          if not name:
+              say("Stop: this step works on a course starter app. For your own project, your instructor gives you this week's changes."); sys.exit(1)
+          facts, s, e, rel, v = card(D, name, int(cj["card"]))
+          if step == "team-update":
+              git("checkout", "-q", "-b", "team-update")
+              for p, t in D[name]["n"].items(): write(p, t)
+              change(e)
+              git("add", "-A"); git("commit", "-q", "-m", "Add the team's update: " + D[name]["m"]["up"]); git("push", "-q", "-f", "origin", "team-update")
+              say("Done: the team's update is on branch team-update. Open a pull request from team-update into main to start its checks.")
+          elif step == "releases":
+              base = "main"
+              for v, items in rel:
+                  git("checkout", "-q", base); git("checkout", "-q", "-B", f"release-{v}"); base = f"release-{v}"
+                  change(items)
+                  git("add", "-A"); git("commit", "-q", "-m", f"Release {v}"); git("push", "-q", "-f", "origin", f"release-{v}")
+              say("Done: branches release-1.1, release-1.2 and release-1.3 are ready. Send each one in order: open its pull request into main and merge it.")
+          elif step == "speed-up":
+              git("checkout", "-q", "-B", "speed-up")
+              write("scripts/rule_check.py", checks(D, name, facts, v))
+              git("add", "-A"); git("commit", "-q", "-m", "Add the owner's rule checks"); git("push", "-q", "-f", "origin", "speed-up")
+              say("Done: the owner's rule checks are on branch speed-up, in scripts/rule_check.py.")
+          PY
